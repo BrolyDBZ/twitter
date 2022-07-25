@@ -22,8 +22,7 @@ bcrypt=Bcrypt(app)
 Base=automap_base()
 Base.prepare(db.engine,reflect=True)
 
-
-import routes
+from routes import *
 
 
 if __name__=="__main__":

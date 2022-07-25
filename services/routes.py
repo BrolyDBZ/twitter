@@ -1,4 +1,5 @@
 from werkzeug.security import check_password_hash,generate_password_hash
+from werkzeug.routing import Rule
 
 from app import Base, db,app
 import string,flask,random,datetime,jwt
@@ -7,6 +8,9 @@ from functools import wraps
 
 user=Base.classes.user
 
+app.url_map.add(Rule('/register',methods=['GET','POST'], endpoint='register'))
+app.url_map.add(Rule('/login',methods=['GET','POST'], endpoint='login'))
+app.url_map.add(Rule('/hello',methods=['GET'], endpoint='hello'))
 
 def token_required(func):
     @wraps(func)
@@ -30,7 +34,7 @@ def token_required(func):
 
 
 
-@app.route('/register',methods=['GET','POST'])
+@app.endpoint('register')
 def register():
     firstName=request.json['firstName']
     lastName=request.json["lastName"]
@@ -64,19 +68,21 @@ def validatePassword(password,rePassword):
     return password==rePassword
 
 
-@app.route('/login',methods=['GET','POST'])
+@app.endpoint('login')
 def login():
-    userName=request.json('userName')
-    password=request.json('password')
+    userName=request.json['userName']
+    password=request.json['password']
     login_user=db.session.query(user).filter_by(userName=userName).first()
     if not login_user:
         return jsonify({'message':"User doesn't exit!!",'ok':False})
     if check_password_hash(login_user.password,password):
         token=jwt.encode({'user_id':login_user.userName,'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},app.config['SECRET_KEY'])
         return jsonify({'token' : token.decode('UTF-8'),'message':'Login sucessful','ok':True})
-    return jsonify({'message':"enter correct password and username",'ok':False})
+    return jsonify({'message':"enter correct password",'ok':False})
 
 
-@app.route('/hello',methods=['GET'])
-def hello():
+@app.endpoint('hello')
+@token_required
+def hello(user):
+    print(user.userName)
     return jsonify({'message':'hello'})
