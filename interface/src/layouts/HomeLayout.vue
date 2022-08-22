@@ -87,7 +87,7 @@
         <div
           class="px-5 py-3 border-b border-lighter flex items-center justify-between"
         >
-          <h1 class="text-xl font-bold">Home</h1>
+          <h1 class="text-xl leading-tight font-bold">Home</h1>
           <i class="far fa-star text-xl text-blue"></i>
         </div>
         <div class="px-5 py-3 border-b-8 border-lighter flex">
@@ -203,11 +203,11 @@
         style="width: 30%"
       >
         <input
-          class="text-sm rounded-full w-full pt-2 pb-2 pr-2 pl-12 bg-lighter focus:outline-none"
+          class="text-sm rounded-full mt-4 w-full pt-2 pb-2 pr-2 pl-12 bg-lighter focus:outline-none"
           placeholder="Search Twitter"
         />
         <i
-          class="fas fa-search absolute left-0 top-0 mt-3 ml-12 text-sm text-light"
+          class="fas fa-search absolute left-0 top-0 mt-11 ml-12 text-sm text-light"
         ></i>
         <div class="w-full rounded-lg bg-lightest mt-4">
           <div class="flex item-center justify-between p-3">
