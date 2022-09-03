@@ -39,7 +39,7 @@
                 class="modal fade"
                 id="signupModal"
                 tabindex="-1"
-                aria-labelledby="signupModalLabel"
+                aria-labelledby="signupLabel"
                 aria-hidden="true"
               >
                 <div
@@ -49,135 +49,148 @@
                     class="modal-content rounded-3xl border-none relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current"
                   >
                     <div class="max-w-2xl rounded-3xl mx-auto bg-white p-16">
-                      <form>
-                        <div class="grid gap-6 mb-6 lg:grid-cols-2">
-                          <div>
-                            <label
-                              for="first_name"
-                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                              >First name</label
-                            >
-                            <input
-                              type="text"
-                              id="first_name"
-                              class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="John"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label
-                              for="last_name"
-                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                              >Last name</label
-                            >
-                            <input
-                              type="text"
-                              id="last_name"
-                              class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="Doe"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label
-                              for="phone"
-                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                              >username</label
-                            >
-                            <input
-                              type="text"
-                              id="phone"
-                              class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="username"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label
-                              for="visitors"
-                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                              >date of Birth</label
-                            >
-                            <input
-                              type="Date"
-                              id="visitors"
-                              class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder=""
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div class="mb-6">
+                      <div
+                        v-show="signupalert.flag"
+                        class="bg-red-100 rounded-lg p-2 px-4 mb-4 text-base text-red-700"
+                        role="alert"
+                      >
+                        {{ signupalert.message }}
+                      </div>
+                      <div class="grid gap-6 mb-6 lg:grid-cols-2">
+                        <div>
                           <label
-                            for="email"
+                            for="first_name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                            >Email address</label
+                            >First name</label
                           >
                           <input
-                            type="email"
-                            id="email"
+                            type="text"
+                            id="first_name"
+                            v-model="signup.firstname"
                             class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="john.doe@company.com"
+                            placeholder="John"
                             required
                           />
                         </div>
-                        <div class="mb-6">
+                        <div>
                           <label
-                            for="password"
+                            for="last_name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                            >Password</label
+                            >Last name</label
                           >
                           <input
-                            type="password"
-                            id="password"
+                            type="text"
+                            id="last_name"
+                            v-model="signup.lastname"
                             class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="•••••••••"
+                            placeholder="Doe"
                             required
                           />
                         </div>
-                        <div class="mb-6">
+                        <div>
                           <label
-                            for="confirm_password"
+                            for="phone"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                            >Confirm password</label
+                            >username</label
                           >
                           <input
-                            type="password"
-                            id="confirm_password"
+                            type="text"
+                            id="phone"
+                            v-model="signup.username"
                             class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="•••••••••"
+                            placeholder="username"
                             required
                           />
                         </div>
-                        <div class="flex items-start mb-6">
-                          <div class="flex items-center h-5">
-                            <input
-                              id="remember"
-                              type="checkbox"
-                              value=""
-                              class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                              required
-                            />
-                          </div>
+                        <div>
                           <label
-                            for="remember"
-                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-                            >I agree with the
-                            <a
-                              href="#"
-                              class="text-blue-600 hover:underline dark:text-blue-500"
-                              >terms and conditions</a
-                            >.</label
+                            for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            >date of Birth</label
                           >
+                          <input
+                            type="Date"
+                            id="visitors"
+                            v-model="signup.dateofBirth"
+                            class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder=""
+                            required
+                          />
                         </div>
-                        <button
-                          type="submit"
-                          class="text-white flex justify-center bg-blue item-center hover:bg-blue focus:ring focus:outline-none focus:ring-blue font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue dark:hover:bg-blue dark:focus:ring-blue"
+                      </div>
+                      <div class="mb-6">
+                        <label
+                          for="email"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Email address</label
                         >
-                          Submit
-                        </button>
-                      </form>
+                        <input
+                          type="email"
+                          id="email"
+                          v-model="signup.email"
+                          class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="john.doe@company.com"
+                          required
+                        />
+                      </div>
+                      <div class="mb-6">
+                        <label
+                          for="password"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Password</label
+                        >
+                        <input
+                          type="password"
+                          id="password"
+                          v-model="signup.password"
+                          class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="•••••••••"
+                          required
+                        />
+                      </div>
+                      <div class="mb-6">
+                        <label
+                          for="confirm_password"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Confirm password</label
+                        >
+                        <input
+                          type="password"
+                          id="confirm_password"
+                          v-model="signup.confirmPassword"
+                          class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="•••••••••"
+                          required
+                        />
+                      </div>
+                      <div class="flex items-start mb-6">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="remember"
+                            type="checkbox"
+                            value=""
+                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                            required
+                          />
+                        </div>
+                        <label
+                          for="remember"
+                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+                          >I agree with the
+                          <a
+                            href="#"
+                            class="text-blue-600 hover:underline dark:text-blue-500"
+                            >terms and conditions</a
+                          >.</label
+                        >
+                      </div>
+                      <button
+                        type="submit"
+                        @click="onsignup"
+                        class="text-white flex justify-center bg-blue item-center hover:bg-blue focus:ring focus:outline-none focus:ring-blue font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue dark:hover:bg-blue dark:focus:ring-blue"
+                      >
+                        Submit
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -194,7 +207,7 @@
                 class="modal fade"
                 id="signinModal"
                 tabindex="-1"
-                aria-labelledby="signupinLabel"
+                aria-labelledby="signinLabel"
                 aria-hidden="true"
               >
                 <div class="modal-dialog relative w-auto pointer-events-none">
@@ -203,6 +216,13 @@
                   >
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-3xl px-12 py-12">
+                      <div
+                        v-show="signinalert.flag"
+                        class="bg-red-100 rounded-lg p-2 px-4 mb-2 text-base text-red-700"
+                        role="alert"
+                      >
+                        {{ signinalert.message }}
+                      </div>
                       <div class="py-6 px-6 lg:px-8">
                         <div class="flex">
                           <h3
@@ -211,79 +231,80 @@
                             Sign in to our platform
                           </h3>
                         </div>
-                        <form class="space-y-6" action="#">
-                          <div>
-                            <label
-                              for="email"
-                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                              >Your email</label
-                            >
-                            <input
-                              type="email"
-                              name="email"
-                              id="email"
-                              class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                              placeholder="name@company.com"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label
-                              for="password"
-                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                              >Your password</label
-                            >
-                            <input
-                              type="password"
-                              name="password"
-                              id="password"
-                              placeholder="••••••••"
-                              class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                              required
-                            />
-                          </div>
-                          <div class="flex justify-between">
-                            <div class="flex items-start">
-                              <div class="flex items-center h-5">
-                                <input
-                                  id="remember"
-                                  type="checkbox"
-                                  value=""
-                                  class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                  required
-                                />
-                              </div>
-                              <label
-                                for="remember"
-                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                >Remember me</label
-                              >
+                        <div>
+                          <label
+                            for="username"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            >your username</label
+                          >
+                          <input
+                            type="text"
+                            name="username"
+                            id="username"
+                            v-model="signin.username"
+                            class="bg-gray-50 mb-3 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="username"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            for="password"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            >Your password</label
+                          >
+                          <input
+                            type="password"
+                            name="password"
+                            id="loginpassword"
+                            v-model="signin.password"
+                            placeholder="••••••••"
+                            class="bg-gray-50 mb-4 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            required
+                          />
+                        </div>
+                        <div class="flex mb-3 justify-between">
+                          <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                              <input
+                                id="loginremember"
+                                type="checkbox"
+                                value=""
+                                class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                                required
+                              />
                             </div>
-                            <a
-                              href="#"
-                              class="text-sm text-blue-700 hover:underline dark:text-blue-500"
-                              >Lost Password?</a
+                            <label
+                              for="remember"
+                              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                              >Remember me</label
                             >
                           </div>
-                          <button
-                            type="submit"
-                            class="w-full focus:outline-none text-white bg-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                          <a
+                            href="#"
+                            class="text-sm text-blue-700 hover:underline dark:text-blue-500"
+                            >Lost Password?</a
                           >
-                            Login to your account
-                          </button>
-                          <div
-                            class="text-sm font-medium text-gray-500 dark:text-gray-300"
+                        </div>
+                        <button
+                          type="submit"
+                          @click="onsignin"
+                          class="w-full focus:outline-none text-white bg-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        >
+                          Login to your account
+                        </button>
+                        <div
+                          class="text-sm font-medium mt-3 text-gray-500 dark:text-gray-300"
+                        >
+                          Not registered?
+                          <a
+                            href="#"
+                            class="text-blue-700 hover:underline dark:text-blue-500"
+                            data-bs-toggle="modal"
+                            data-bs-target="#signupModal"
+                            >Create account</a
                           >
-                            Not registered?
-                            <a
-                              href="#"
-                              class="text-blue-700 hover:underline dark:text-blue-500"
-                              data-bs-toggle="modal"
-                              data-bs-target="#signupModal"
-                              >Create account</a
-                            >
-                          </div>
-                        </form>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -321,9 +342,83 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+const axios = require("axios");
 export default defineComponent({
   name: "LoginLayout",
   components: {},
+  data() {
+    return {
+      signup: {
+        firstname: ref(""),
+        lastname: ref(""),
+        username: ref(""),
+        dateofBirth: ref(""),
+        email: ref(""),
+        password: ref(""),
+        confirmPassword: ref(""),
+      },
+      signin: {
+        username: ref(""),
+        password: ref(""),
+      },
+      signinalert: {
+        flag: false,
+        message: ref(""),
+      },
+      signupalert: {
+        flag: false,
+        message: ref(""),
+      },
+    };
+  },
+  methods: {
+    onsignup: function () {
+      this.$api
+        .post("/register", {
+          firstName: this.signup.firstname,
+          lastName: this.signup.lastname,
+          userName: this.signup.username,
+          email: this.signup.email,
+          dateOfBirth: this.signup.dateofBirth,
+          password: this.signup.password,
+          rePassword: this.signup.confirmPassword,
+        })
+        .then((response) => {
+          if (response.data.ok) {
+            this.signin.username = this.signup.username;
+            this.signin.password = this.signup.password;
+            $("#signupModal").modal("hide");
+            this.onsignin();
+          } else {
+            this.signupalert.message = response.data.message;
+            this.signupalert.flag = true;
+          }
+        });
+    },
+    onsignin: function () {
+      this.$api
+        .post("/login", {
+          userName: this.signin.username,
+          password: this.signin.password,
+        })
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.ok) {
+            localStorage.setItem(
+              "twitterAuthenticationtoken",
+              response.data.token
+            );
+            this.$store.state.auth = true;
+            this.$store.state.username = this.signin.username;
+            $("#signinModal").modal("hide");
+            this.$router.push("/home");
+          } else {
+            this.signinalert.message = response.data.message;
+            this.signinalert.flag = true;
+          }
+        });
+    },
+  },
 });
 </script>
 
@@ -479,7 +574,7 @@ h3 {
   }
 } */
 
-@media (max-width: 580px) {
+/* @media (max-width: 580px) {
   .content {
     padding: 2rem;
     margin: 0;
@@ -499,5 +594,5 @@ h3 {
   h3 {
     font-size: 1.7rem;
   }
-}
+} */
 </style>

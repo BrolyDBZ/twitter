@@ -8,9 +8,8 @@ from functools import wraps
 
 user=Base.classes.user
 
-app.url_map.add(Rule('/register',methods=['GET','POST'], endpoint='register'))
-app.url_map.add(Rule('/login',methods=['GET','POST'], endpoint='login'))
-app.url_map.add(Rule('/hello',methods=['GET'], endpoint='hello'))
+app.url_map.add(Rule('/api/register',methods=['GET','POST'], endpoint='register'))
+app.url_map.add(Rule('/api/login',methods=['GET','POST'], endpoint='login'))
 
 def token_required(func):
     @wraps(func)
@@ -81,8 +80,3 @@ def login():
     return jsonify({'message':"enter correct password",'ok':False})
 
 
-@app.endpoint('hello')
-@token_required
-def hello(user):
-    print(user.userName)
-    return jsonify({'message':'hello'})
